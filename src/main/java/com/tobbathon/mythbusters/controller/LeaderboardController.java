@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tobbathon.mythbusters.model.dto.LeaderboardDTO;
-import com.tobbathon.mythbusters.model.entity.Leaderboard;
 import com.tobbathon.mythbusters.service.LeaderboardService;
 
 @RestController

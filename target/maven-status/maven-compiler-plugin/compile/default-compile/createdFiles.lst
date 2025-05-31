@@ -1,0 +1,17 @@
+com/tobbathon/mythbusters/service/ProfileService.class
+com/tobbathon/mythbusters/MythbustersApplication.class
+com/tobbathon/mythbusters/repository/ProfileRepository.class
+com/tobbathon/mythbusters/controller/LeaderboardController.class
+com/tobbathon/mythbusters/service/AvatarService.class
+com/tobbathon/mythbusters/configuration/SecurityConfig.class
+com/tobbathon/mythbusters/model/dto/ProfileDTO.class
+com/tobbathon/mythbusters/model/entity/Profile.class
+com/tobbathon/mythbusters/model/dto/ProfileCreateDTO.class
+com/tobbathon/mythbusters/repository/AvatarRepository.class
+com/tobbathon/mythbusters/controller/AvatarController.class
+com/tobbathon/mythbusters/model/dto/LeaderboardDTO.class
+com/tobbathon/mythbusters/model/entity/Leaderboard.class
+com/tobbathon/mythbusters/model/entity/Avatar.class
+com/tobbathon/mythbusters/repository/LeaderboardRepository.class
+com/tobbathon/mythbusters/service/LeaderboardService.class
+com/tobbathon/mythbusters/controller/ProfileController.class

@@ -1,0 +1,17 @@
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/MythbustersApplication.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/configuration/SecurityConfig.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/controller/AvatarController.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/controller/LeaderboardController.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/controller/ProfileController.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/dto/LeaderboardDTO.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/dto/ProfileCreateDTO.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/dto/ProfileDTO.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/entity/Avatar.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/entity/Leaderboard.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/model/entity/Profile.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/repository/AvatarRepository.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/repository/LeaderboardRepository.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/repository/ProfileRepository.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/service/AvatarService.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/service/LeaderboardService.java
+/home/gokcen/MythBustersBackend/src/main/java/com/tobbathon/mythbusters/service/ProfileService.java
