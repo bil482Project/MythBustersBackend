@@ -88,9 +88,8 @@ def main():
     admin_user = input("Yönetici kullanıcı adı (ör. postgres): ") or "postgres"
     admin_password = getpass("Yönetici parolası: ")
 
-    # Sabit kullanıcı ve veritabanı bilgileri
-    new_user = "genli"
-    new_user_password = "genli123"
+    new_user = input("Yeni kullanıcı adı (ör. postgres): ") or "postgres"
+    new_user_password = getpass("{new_user} yönetici parolası: ")
     db_name = "myth_busters_db"
     # sql_files = ["MythBustersBackend/src/main/resources/db/migration/V1__CREATE_TABEL.sql", 
     #              "MythBustersBackend/src/main/resources/db/migration/V2__INSERT_DATA.sql"]
