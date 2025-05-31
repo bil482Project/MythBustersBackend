@@ -29,10 +29,10 @@ public class ProfileCreateDTO {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.profilePhoto = profilePhoto;
-        this.raceGameAvatarId = raceGameAvatarId;
-        this.baloonGameAvatarId = baloonGameAvatarId;
-        this.hangmanGameAvatarId = hangmanGameAvatarId;
+        this.profilePhoto = profilePhoto == null ? "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" : profilePhoto;
+        this.raceGameAvatarId = raceGameAvatarId == null ? 1 : raceGameAvatarId;
+        this.baloonGameAvatarId = baloonGameAvatarId == null ? 1 : baloonGameAvatarId;
+        this.hangmanGameAvatarId = hangmanGameAvatarId == null ? 1 : hangmanGameAvatarId;
     }
 
     public String getUsername() {

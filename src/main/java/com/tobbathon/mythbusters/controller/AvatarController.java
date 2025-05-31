@@ -18,7 +18,8 @@ public class AvatarController {
     public AvatarController(AvatarService avatarService) {
         this.avatarService = avatarService;
     }
-
+    //örnek: http://localhost:8080/api/avatars?gameType=car
+    @GetMapping
     public List<Avatar> findAvatarByGameType(@RequestParam("gameType") String gameType) {
         return avatarService.findAvatarByGameType(gameType);
     }

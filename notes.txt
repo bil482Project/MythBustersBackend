@@ -16,6 +16,7 @@ GRANT ALL ON TABLE avatar TO genli;
 CREATE TABLE avatar (
     id SERIAL PRIMARY KEY,
     image_url VARCHAR(255) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     game_type VARCHAR(50) NOT NULL
 );
 
@@ -45,17 +46,21 @@ CREATE TABLE leaderboard (
 
 INSERT INTO avatar (
     image_url,
+    name,
     game_type
 ) VALUES (
     'url1',
+    'car_avatar1',
     'car'
 ),
 (
     'url2',
+    'baloon_avatar1',
     'baloon'
 ),
 (
     'url3',
+    'hangman_avatar1',
     'hangman'
 );
 
