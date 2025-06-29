@@ -67,4 +67,25 @@ public class ProfileService {
                 savedProfile.getHangmanGameAvatar() != null ? savedProfile.getHangmanGameAvatar().getId() : null
         );
     }
+
+    public ProfileDTO login(String email, String rawPassword) {
+        // 1. Kullanıcıyı email ile bul
+        Profile profile = profileRepository.findByEmail(email);
+
+        // 2. Şifreyi kontrol et
+        if (!passwordEncoder.matches(rawPassword, profile.getPasswordHash())) {
+            throw new IllegalArgumentException("Invalid credentials");
+        }
+
+        // 3. DTO olarak dön
+        return new ProfileDTO(
+                profile.getId(),
+                profile.getUsername(),
+                profile.getEmail(),
+                profile.getProfilePhoto(),
+                profile.getRaceGameAvatar() != null ? profile.getRaceGameAvatar().getId() : null,
+                profile.getBaloonGameAvatar() != null ? profile.getBaloonGameAvatar().getId() : null,
+                profile.getHangmanGameAvatar() != null ? profile.getHangmanGameAvatar().getId() : null
+        );
+    }
 }

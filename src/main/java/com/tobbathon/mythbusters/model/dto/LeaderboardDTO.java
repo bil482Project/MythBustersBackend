@@ -5,9 +5,9 @@ public class LeaderboardDTO {
     private Integer profileId;
     private String username;
     private String profilePhoto;
-    private Integer score;
+    private Long score;
 
-    public LeaderboardDTO(Integer profileId, String username, String profilePhoto, Integer score) {
+    public LeaderboardDTO(Integer profileId, String username, String profilePhoto, Long score) {
         this.profileId = profileId;
         this.username = username;
         this.profilePhoto = profilePhoto;
@@ -36,11 +36,11 @@ public class LeaderboardDTO {
         this.profilePhoto = profilePhoto;
     }
 
-    public Integer getScore() {
+    public Long getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Long score) {
         this.score = score;
     }
 

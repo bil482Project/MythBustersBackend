@@ -12,4 +12,5 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long>{
     //inherit ettiği bir findAll var zaten
+    Profile findByEmail(String email);
 }

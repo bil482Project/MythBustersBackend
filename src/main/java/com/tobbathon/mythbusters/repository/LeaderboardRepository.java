@@ -19,6 +19,18 @@ public interface LeaderboardRepository extends JpaRepository<Leaderboard, Long> 
     // List<Leaderboard> orderLeaderboardByGameTypeDesc(@Param("gameType") String gameType);
 
     //select * from leaderboard join profile p on profile_id=p.id;
-    @Query("SELECT NEW com.tobbathon.mythbusters.model.dto.LeaderboardDTO(profileId, username, profilePhoto, score) FROM Leaderboard l JOIN Profile p ON l.profileId=p.id WHERE l.gameType = :gameType ORDER BY l.score DESC")
+    @Query("SELECT NEW com.tobbathon.mythbusters.model.dto.LeaderboardDTO(" +
+            "p.id, p.username, p.profilePhoto, SUM(l.score)) " +
+            "FROM Leaderboard l JOIN Profile p ON l.profileId = p.id " +
+            "WHERE l.gameType = :gameType " +
+            "GROUP BY p.id, p.username, p.profilePhoto " +
+            "ORDER BY SUM(l.score) DESC")
     List<LeaderboardDTO> orderLeaderboardByGameTypeDesc(@Param("gameType") String gameType);
+
+    @Query("SELECT NEW com.tobbathon.mythbusters.model.dto.LeaderboardDTO(" +
+            "p.id, p.username, p.profilePhoto, SUM(l.score)) " +
+            "FROM Leaderboard l JOIN Profile p ON l.profileId = p.id " +
+            "GROUP BY p.id, p.username, p.profilePhoto " +
+            "ORDER BY SUM(l.score) DESC")
+    List<LeaderboardDTO> findAllLeaderboardDTO();
 }
