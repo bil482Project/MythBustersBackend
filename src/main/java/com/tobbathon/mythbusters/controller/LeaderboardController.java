@@ -13,7 +13,7 @@ import com.tobbathon.mythbusters.service.LeaderboardService;
 
 @RestController
 @RequestMapping("/api/leaderboard")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class LeaderboardController {
     private final LeaderboardService leaderboardService;
 
