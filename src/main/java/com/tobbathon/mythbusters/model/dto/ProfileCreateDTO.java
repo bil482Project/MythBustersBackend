@@ -1,9 +1,12 @@
 package com.tobbathon.mythbusters.model.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Data
 public class ProfileCreateDTO {
 
     @NotBlank(message = "Kullanıcı adı boş olamaz")
@@ -18,76 +21,41 @@ public class ProfileCreateDTO {
     @Size(min = 6, message = "Şifre en az 6 karakter olmalı")
     private String password;
 
-    private String profilePhoto;
-
-    private Integer raceGameAvatarId;
-    private Integer baloonGameAvatarId;
-    private Integer hangmanGameAvatarId;
-
-    public ProfileCreateDTO(String username, String email, String password, String profilePhoto,
-                           Integer raceGameAvatarId, Integer baloonGameAvatarId, Integer hangmanGameAvatarId) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.profilePhoto = profilePhoto == null ? "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" : profilePhoto;
-        this.raceGameAvatarId = raceGameAvatarId == null ? 1 : raceGameAvatarId;
-        this.baloonGameAvatarId = baloonGameAvatarId == null ? 1 : baloonGameAvatarId;
-        this.hangmanGameAvatarId = hangmanGameAvatarId == null ? 1 : hangmanGameAvatarId;
+    private ProfileCreateDTO(Builder builder) {
+        this.username = builder.username;
+        this.email = builder.email;
+        this.password = builder.password;
     }
 
-    public String getUsername() {
-        return username;
+    public ProfileCreateDTO() {}
+
+    public static class Builder {
+        private String username;
+        private String email;
+        private String password;
+
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public ProfileCreateDTO build() {
+            // Zorunlu alanlar kontrolü (opsiyonel ama best practice)
+            if (username == null || email == null || password == null) {
+                throw new IllegalStateException("Kullanıcı adı, e-posta ve şifre zorunludur.");
+            }
+            return new ProfileCreateDTO(this);
+        }
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getProfilePhoto() {
-        return profilePhoto;
-    }
-
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-
-    public Integer getRaceGameAvatarId() {
-        return raceGameAvatarId;
-    }
-
-    public void setRaceGameAvatarId(Integer raceGameAvatarId) {
-        this.raceGameAvatarId = raceGameAvatarId;
-    }
-
-    public Integer getBaloonGameAvatarId() {
-        return baloonGameAvatarId;
-    }
-
-    public void setBaloonGameAvatarId(Integer baloonGameAvatarId) {
-        this.baloonGameAvatarId = baloonGameAvatarId;
-    }
-
-    public Integer getHangmanGameAvatarId() {
-        return hangmanGameAvatarId;
-    }
-
-    public void setHangmanGameAvatarId(Integer hangmanGameAvatarId) {
-        this.hangmanGameAvatarId = hangmanGameAvatarId;
-    }
 }

@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
-@Table(name = "avatar") 
+@Table(name = "avatar")
+@Data
 public class Avatar {
     
     @Id
@@ -23,37 +25,5 @@ public class Avatar {
 
     @Column(name = "game_type", nullable = false)
     private String gameType;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getimageUrl() {
-        return imageUrl;
-    }
-
-    public void setimageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
     
 }

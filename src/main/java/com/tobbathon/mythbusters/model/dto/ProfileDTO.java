@@ -1,6 +1,9 @@
 package com.tobbathon.mythbusters.model.dto;
 
+import lombok.Data;
+
 //belki işime yarar
+@Data
 public class ProfileDTO {
     private Integer id;
     private String username;
@@ -21,59 +24,4 @@ public class ProfileDTO {
         this.hangmanGameAvatarId = hangmanGameAvatarId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getProfilePhoto() {
-        return profilePhoto;
-    }
-
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-
-    public Integer getRaceGameAvatarId() {
-        return raceGameAvatarId;
-    }
-
-    public void setRaceGameAvatarId(Integer raceGameAvatarId) {
-        this.raceGameAvatarId = raceGameAvatarId;
-    }
-
-    public Integer getBaloonGameAvatarId() {
-        return baloonGameAvatarId;
-    }
-
-    public void setBaloonGameAvatarId(Integer baloonGameAvatarId) {
-        this.baloonGameAvatarId = baloonGameAvatarId;
-    }
-
-    public Integer getHangmanGameAvatarId() {
-        return hangmanGameAvatarId;
-    }
-
-    public void setHangmanGameAvatarId(Integer hangmanGameAvatarId) {
-        this.hangmanGameAvatarId = hangmanGameAvatarId;
-    }
 }

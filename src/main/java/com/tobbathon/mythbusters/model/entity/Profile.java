@@ -1,9 +1,11 @@
 package com.tobbathon.mythbusters.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "profile")
+@Data
 public class Profile {
 
     @Id
@@ -33,54 +35,5 @@ public class Profile {
     @ManyToOne
     @JoinColumn(name = "hangman_game_avatar_id")
     private Avatar hangmanGameAvatar;
-
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-    public String getProfilePhoto() {
-        return profilePhoto;
-    }
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-    public Avatar getRaceGameAvatar() {
-        return raceGameAvatar;
-    }
-    public void setRaceGameAvatar(Avatar raceGameAvatar) {
-        this.raceGameAvatar = raceGameAvatar;
-    }
-    public Avatar getBaloonGameAvatar() {
-        return baloonGameAvatar;
-    }
-    public void setBaloonGameAvatar(Avatar baloonGameAvatar) {
-        this.baloonGameAvatar = baloonGameAvatar;
-    }
-    public Avatar getHangmanGameAvatar() {
-        return hangmanGameAvatar;
-    }
-    public void setHangmanGameAvatar(Avatar hangmanGameAvatar) {
-        this.hangmanGameAvatar = hangmanGameAvatar;
-    }
 
 }

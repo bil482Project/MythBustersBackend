@@ -21,12 +21,18 @@ public class ProfileController {
 
     @PostMapping
     public ProfileDTO createProfile(@Valid @RequestBody ProfileCreateDTO createDTO) {
-        return profileService.createProfile(createDTO);
+        ProfileCreateDTO dto = new ProfileCreateDTO.Builder()
+                .username(createDTO.getUsername())
+                .email(createDTO.getEmail())
+                .password(createDTO.getPassword())
+                .build();
+
+        return profileService.createProfile(dto);
     }
 
     @PostMapping("/login")
-    public ProfileDTO login(@RequestBody LoginRequestDTO loginRequest) {
-        return profileService.login(loginRequest.getEmail(), loginRequest.getPassword());
+    public ProfileDTO login(@RequestBody LoginRequestDTO loginRequestDTO) {
+        return profileService.login(loginRequestDTO);
     }
 
 }
