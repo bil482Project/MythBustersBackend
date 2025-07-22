@@ -36,4 +36,6 @@ public class Profile {
     @JoinColumn(name = "hangman_game_avatar_id")
     private Avatar hangmanGameAvatar;
 
+    @Column(name = "coin")
+    private Integer coin;
 }

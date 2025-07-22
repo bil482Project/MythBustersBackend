@@ -25,6 +25,7 @@ public class ProfileController {
                 .username(createDTO.getUsername())
                 .email(createDTO.getEmail())
                 .password(createDTO.getPassword())
+                .coin(createDTO.getCoin() != null ? createDTO.getCoin() : 50) // Default coin value
                 .build();
 
         return profileService.createProfile(dto);
@@ -35,6 +36,10 @@ public class ProfileController {
         return profileService.login(loginRequestDTO);
     }
 
+    @PostMapping("/updateCoin/{coin}")
+    public void updateCoin(@PathVariable("coin") Integer coin, @RequestBody String username) {
+        profileService.updateCoin(username, coin);
+    }
     // @GetMapping("/{id}")
     // public ProfileDTO getProfile(@PathVariable Long id) {
     //     return profileService.getAvatarByProfileId(id);

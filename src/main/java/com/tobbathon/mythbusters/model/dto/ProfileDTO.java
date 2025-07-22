@@ -12,9 +12,10 @@ public class ProfileDTO {
     private Integer raceGameAvatarId;
     private Integer balloonGameAvatarId;
     private Integer hangmanGameAvatarId;
+    private Integer coin;
 
     public ProfileDTO(Integer id, String username, String email, String profilePhoto, 
-                     Integer raceGameAvatarId, Integer balloonGameAvatarId, Integer hangmanGameAvatarId) {
+                     Integer raceGameAvatarId, Integer balloonGameAvatarId, Integer hangmanGameAvatarId, Integer coin) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -22,6 +23,7 @@ public class ProfileDTO {
         this.raceGameAvatarId = raceGameAvatarId;
         this.balloonGameAvatarId = balloonGameAvatarId;
         this.hangmanGameAvatarId = hangmanGameAvatarId;
+        this.coin = coin;
     }
 
 }

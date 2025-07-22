@@ -32,6 +32,7 @@ public class ProfileService {
         profile.setUsername(createDTO.getUsername());
         profile.setEmail(createDTO.getEmail());
         profile.setPasswordHash(hashedPassword);
+        profile.setCoin(createDTO.getCoin());
 
         // Default kullanıcı profili.
         profile.setProfilePhoto("https://www.w3schools.com/howto/img_avatar.png");
@@ -61,7 +62,8 @@ public class ProfileService {
                 savedProfile.getProfilePhoto(),
                 savedProfile.getRaceGameAvatar().getId(),
                 savedProfile.getBalloonGameAvatar().getId(),
-                savedProfile.getHangmanGameAvatar().getId()
+                savedProfile.getHangmanGameAvatar().getId(),
+                savedProfile.getCoin()
         );
     }
 
@@ -82,7 +84,12 @@ public class ProfileService {
                 profile.getProfilePhoto(),
                 profile.getRaceGameAvatar().getId(),
                 profile.getBalloonGameAvatar().getId(),
-                profile.getHangmanGameAvatar().getId()
+                profile.getHangmanGameAvatar().getId(),
+                profile.getCoin()
         );
+    }
+
+    public void updateCoin(String username, Integer coin) {
+        profileRepository.updateCoin(username, coin);
     }
 }

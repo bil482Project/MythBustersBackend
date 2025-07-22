@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS profile (
     race_game_avatar_id BIGINT,
     balloon_game_avatar_id BIGINT,
     hangman_game_avatar_id BIGINT,
+    coin INTEGER,
     FOREIGN KEY (race_game_avatar_id) REFERENCES avatar(id),
     FOREIGN KEY (balloon_game_avatar_id) REFERENCES avatar(id),
     FOREIGN KEY (hangman_game_avatar_id) REFERENCES avatar(id)

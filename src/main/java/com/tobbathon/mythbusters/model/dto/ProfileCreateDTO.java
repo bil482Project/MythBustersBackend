@@ -21,6 +21,8 @@ public class ProfileCreateDTO {
     @Size(min = 6, message = "Şifre en az 6 karakter olmalı")
     private String password;
 
+    private Integer coin;
+
     private ProfileCreateDTO(Builder builder) {
         this.username = builder.username;
         this.email = builder.email;
@@ -33,6 +35,7 @@ public class ProfileCreateDTO {
         private String username;
         private String email;
         private String password;
+        private Integer coin;
 
         public Builder username(String username) {
             this.username = username;
@@ -49,9 +52,14 @@ public class ProfileCreateDTO {
             return this;
         }
 
+        public Builder coin(Integer coin) {
+            this.coin = coin;
+            return this;
+        }
+
         public ProfileCreateDTO build() {
             // Zorunlu alanlar kontrolü (opsiyonel ama best practice)
-            if (username == null || email == null || password == null) {
+            if (username == null || email == null || password == null || coin == null) {
                 throw new IllegalStateException("Kullanıcı adı, e-posta ve şifre zorunludur.");
             }
             return new ProfileCreateDTO(this);
