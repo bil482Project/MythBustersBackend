@@ -41,7 +41,8 @@ INSERT INTO profile (
     ('john_doe', 'john.doe@example.com', '$2a$10$exampleHashedPassword1234567890', 'http://example.com/john_profile.jpg', 1, 3, 4, 400),
     ('jane_smith', 'jane.smith@example.com', '$2a$10$anotherHashedPassword0987654321', 'http://example.com/jane_profile.jpg', 2, 3, 4, 200),
     ('alice_wong', 'alice.wong@example.com', '$2a$10$hashedPasswordAlice123456789', 'http://example.com/alice_profile.jpg', 2, 3, 4, 20),
-    ('bob_jones', 'bob.jones@example.com', '$2a$10$hashedPasswordBob9876543210', 'http://example.com/bob_profile.jpg', 1, 3, 4, 0);
+    ('bob_jones', 'bob.jones@example.com', '$2a$10$hashedPasswordBob9876543210', 'http://example.com/bob_profile.jpg', 1, 3, 4, 0),
+    ('ali', 'ali@gmail.com', '$2a$10$c7qMBbWIp9ktyNK5DwIvleOEUBGXlAudRhSrOqiqzlc4gOf/pbQn2', 'https://www.w3schools.com/howto/img_avatar.png', 1, 3, 4, 120);
 
 INSERT INTO leaderboard (
     profile_id,
