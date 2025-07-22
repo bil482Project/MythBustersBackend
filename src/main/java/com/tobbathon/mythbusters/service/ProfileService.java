@@ -41,12 +41,12 @@ public class ProfileService {
                 avatarRepository.findById(1)
                         .orElseThrow(() -> new IllegalArgumentException("Default race avatar bulunamadı"))
         );
-        profile.setBaloonGameAvatar(
-                avatarRepository.findById(3)
-                        .orElseThrow(() -> new IllegalArgumentException("Default baloon avatar bulunamadı"))
+        profile.setBalloonGameAvatar(
+                avatarRepository.findById(2)
+                        .orElseThrow(() -> new IllegalArgumentException("Default balloon avatar bulunamadı"))
         );
         profile.setHangmanGameAvatar(
-                avatarRepository.findById(5)
+                avatarRepository.findById(3)
                         .orElseThrow(() -> new IllegalArgumentException("Default hangman avatar bulunamadı"))
         );
 
@@ -60,7 +60,7 @@ public class ProfileService {
                 savedProfile.getEmail(),
                 savedProfile.getProfilePhoto(),
                 savedProfile.getRaceGameAvatar().getId(),
-                savedProfile.getBaloonGameAvatar().getId(),
+                savedProfile.getBalloonGameAvatar().getId(),
                 savedProfile.getHangmanGameAvatar().getId()
         );
     }
@@ -81,7 +81,7 @@ public class ProfileService {
                 profile.getEmail(),
                 profile.getProfilePhoto(),
                 profile.getRaceGameAvatar().getId(),
-                profile.getBaloonGameAvatar().getId(),
+                profile.getBalloonGameAvatar().getId(),
                 profile.getHangmanGameAvatar().getId()
         );
     }

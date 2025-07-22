@@ -35,4 +35,8 @@ public class ProfileController {
         return profileService.login(loginRequestDTO);
     }
 
+    // @GetMapping("/{id}")
+    // public ProfileDTO getProfile(@PathVariable Long id) {
+    //     return profileService.getAvatarByProfileId(id);
+    // }
 }

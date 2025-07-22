@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS avatar (
     id SERIAL PRIMARY KEY,
-    image_url VARCHAR(255) NOT NULL,
+    emoji VARCHAR(100) NOT NULL,
     name VARCHAR(50) NOT NULL,
     game_type VARCHAR(50) NOT NULL
 );
@@ -12,10 +12,10 @@ CREATE TABLE IF NOT EXISTS profile (
     password_hash VARCHAR(255) NOT NULL,
     profile_photo VARCHAR(255),
     race_game_avatar_id BIGINT,
-    baloon_game_avatar_id BIGINT,
+    balloon_game_avatar_id BIGINT,
     hangman_game_avatar_id BIGINT,
     FOREIGN KEY (race_game_avatar_id) REFERENCES avatar(id),
-    FOREIGN KEY (baloon_game_avatar_id) REFERENCES avatar(id),
+    FOREIGN KEY (balloon_game_avatar_id) REFERENCES avatar(id),
     FOREIGN KEY (hangman_game_avatar_id) REFERENCES avatar(id)
 );
 

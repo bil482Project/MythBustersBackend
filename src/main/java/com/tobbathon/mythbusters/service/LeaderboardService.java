@@ -7,24 +7,22 @@ import org.springframework.stereotype.Service;
 import com.tobbathon.mythbusters.model.dto.LeaderboardDTO;
 import com.tobbathon.mythbusters.model.entity.Leaderboard;
 import com.tobbathon.mythbusters.repository.LeaderboardRepository;
+import com.tobbathon.mythbusters.service.strategy.LeaderboardStrategyFactory;
+import com.tobbathon.mythbusters.service.strategy.LeaderboardStrategy;
 
 @Service
 public class LeaderboardService {
-    private final LeaderboardRepository leaderboardRepository;
+    private final LeaderboardStrategyFactory strategyFactory;
 
     public LeaderboardService(LeaderboardRepository leaderboardRepository) {
-        this.leaderboardRepository = leaderboardRepository;
+        this.strategyFactory = new LeaderboardStrategyFactory(leaderboardRepository);
     }
 
     public List<LeaderboardDTO> orderLeaderboardByGameTypeDesc(String gameType) {
-        // Bu metot, gameType'a göre profilleri sıralar.
-        // Örneğin, gameType 1 ise RaceGameAvatar'a göre, 2 ise BaloonGameAvatar'a göre sıralama yapılabilir.
-        try{
-            if ("all".equalsIgnoreCase(gameType)) {
-                return leaderboardRepository.findAllLeaderboardDTO();
-            }
-            return leaderboardRepository.orderLeaderboardByGameTypeDesc(gameType);
-        }catch (IllegalArgumentException e) {
+        try {
+            LeaderboardStrategy strategy = strategyFactory.getStrategy(gameType);
+            return strategy.getLeaderboard();
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid game type", e);
         }
     }

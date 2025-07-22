@@ -10,17 +10,17 @@ public class ProfileDTO {
     private String email;
     private String profilePhoto;
     private Integer raceGameAvatarId;
-    private Integer baloonGameAvatarId;
+    private Integer balloonGameAvatarId;
     private Integer hangmanGameAvatarId;
 
     public ProfileDTO(Integer id, String username, String email, String profilePhoto, 
-                     Integer raceGameAvatarId, Integer baloonGameAvatarId, Integer hangmanGameAvatarId) {
+                     Integer raceGameAvatarId, Integer balloonGameAvatarId, Integer hangmanGameAvatarId) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.profilePhoto = profilePhoto;
         this.raceGameAvatarId = raceGameAvatarId;
-        this.baloonGameAvatarId = baloonGameAvatarId;
+        this.balloonGameAvatarId = balloonGameAvatarId;
         this.hangmanGameAvatarId = hangmanGameAvatarId;
     }
 

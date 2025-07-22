@@ -1,4 +1,3 @@
-#pip install psycopg2-binary
 import psycopg2
 from psycopg2 import sql
 import os
@@ -12,7 +11,8 @@ def connect_to_postgres(host, port, user, password, database=None):
             port=port,
             user=user,
             password=password,
-            database=database
+            database=database,
+            connect_timeout=5
         )
         conn.autocommit = True
         return conn
@@ -25,7 +25,9 @@ def create_user_if_not_exists(conn, username, password):
     try:
         with conn.cursor() as cur:
             cur.execute(
-                sql.SQL("CREATE USER {} WITH PASSWORD %s").format(sql.Identifier(username)),
+                sql.SQL("CREATE USER {} WITH ENCRYPTED PASSWORD %s").format(
+                    sql.Identifier(username)
+                ),
                 [password]
             )
             print(f"Kullanıcı '{username}' oluşturuldu.")
@@ -44,52 +46,48 @@ def create_database_if_not_exists(conn, db_name, owner):
                 )
             )
             print(f"Veritabanı '{db_name}' oluşturuldu.")
-            # 6. application.properties dosyasını oluştur
-            create_application_properties(host, port, db_name, new_user, new_user_password)
-
     except psycopg2.errors.DuplicateDatabase:
         print(f"Veritabanı '{db_name}' zaten var, oluşturulmadı.")
     except psycopg2.Error as e:
         print(f"Veritabanı oluşturma hatası: {e}")
 
-def run_sql_file(conn, sql_file):
-    """SQL dosyasını çalıştır."""
-    if not os.path.exists(sql_file):
-        print(f"Hata: '{sql_file}' dosyası bulunamadı.")
-        return
-    try:
-        with open(sql_file, 'r') as f:
-            sql_commands = f.read()
-        with conn.cursor() as cur:
-            cur.execute(sql_commands)
-        print(f"'{sql_file}' dosyası başarıyla çalıştırıldı.")
-    except psycopg2.Error as e:
-        print(f"SQL dosyası çalıştırma hatası: {e}")
-
 def create_application_properties(host, port, db_name, username, password):
-    """application.properties dosyası oluştur."""
+    """application.properties dosyası oluştur veya güncelle."""
+    properties_file = "./src/main/resources/application.properties"
     new_content = f"""spring.datasource.url=jdbc:postgresql://{host}:{port}/{db_name}
 spring.datasource.username={username}
 spring.datasource.password={password}
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 """
-    with open("./src/main/resources/application.properties", "r") as fr:
-        file_content = fr.read()
-        print("file_content**:"+file_content)
-        fr.close()
-        with open("./src/main/resources/application.properties", "w") as fw:
-            fw.write(file_content + new_content)
-            fw.close()
-    print("application.properties dosyası oluşturuldu.")
+    try:
+        os.makedirs(os.path.dirname(properties_file), exist_ok=True)
+        if os.path.exists(properties_file):
+            with open(properties_file, "r") as fr:
+                existing_content = fr.read()
+            if new_content.strip() not in existing_content:
+                with open(properties_file, "a") as fw:
+                    fw.write("\n" + new_content)
+                print("application.properties dosyası güncellendi.")
+            else:
+                print("application.properties zaten güncel, değişiklik yapılmadı.")
+        else:
+            with open(properties_file, "w") as fw:
+                fw.write(new_content)
+            print("application.properties dosyası oluşturuldu.")
+    except IOError as e:
+        print(f"application.properties oluşturma/güncelleme hatası: {e}")
 
 def main():
+    """Ana fonksiyon: PostgreSQL kurulumunu gerçekleştir."""
     # PostgreSQL bağlantı bilgileri
-    host = input("PostgreSQL host (varsayılan: localhost): ") or "localhost"
-    port = input("PostgreSQL port (varsayılan: 5432): ") or "5432"
-    admin_user = input("Yönetici kullanıcı adı (ör. postgres): ") or "postgres"
-    admin_password = getpass("Yönetici parolası: ")
-
-    new_user = input("Yeni kullanıcı adı (ör. postgres): ") or "postgres"
-    new_user_password = getpass("{new_user} yönetici parolası: ")
+    host = os.getenv("PG_HOST", "localhost")
+    port = os.getenv("PG_PORT", "5432")
+    admin_user = os.getenv("PG_ADMIN_USER", "postgres")
+    admin_password = getpass("Yönetici parolası (varsayılan 'postgres' için boş bırakın): ") or "postgres"
+    
+    new_user = input("Yeni kullanıcı adı (varsayılan 'app_user' için boş bırakın): ") or "app_user"
+    new_user_password = getpass(f"{new_user} için parola: ")
     db_name = "myth_busters_db"
     # sql_files = ["MythBustersBackend/src/main/resources/db/migration/V1__CREATE_TABEL.sql", 
     #              "MythBustersBackend/src/main/resources/db/migration/V2__INSERT_DATA.sql"]
@@ -100,22 +98,20 @@ def main():
         print("PostgreSQL'e bağlanılamadı. Lütfen bilgileri kontrol edin.")
         return
 
-    # 2. Kullanıcıyı oluştur (varsa hata verme)
-    create_user_if_not_exists(conn, new_user, new_user_password)
+    try:
+        # 2. Kullanıcıyı oluştur
+        create_user_if_not_exists(conn, new_user, new_user_password)
 
-    # 3. Veritabanını oluştur (varsa hata verme)
-    create_database_if_not_exists(conn, db_name, new_user)
-
-    # 4. Yönetici bağlantısını kapat
-    conn.close()
-
-    # 5. Yeni veritabanına bağlan ve SQL dosyasını çalıştır (eğer belirtilmişse)
-    # if sql_file:
-    #     conn = connect_to_postgres(host, port, new_user, new_user_password, db_name)
-    #     if conn:
-    #         run_sql_file(conn, sql_file)
-    #         conn.close()
-
+        # 3. Veritabanını oluştur ve application.properties'i güncelle
+        create_database_if_not_exists(conn, db_name, new_user)
+        
+        # 4. Yeni kullanıcıyla bağlan ve application.properties oluştur
+        create_application_properties(host, port, db_name, new_user, new_user_password)
+        
+    finally:
+        # 5. Bağlantıyı kapat
+        conn.close()
+        print("PostgreSQL bağlantısı kapatıldı.")
 
 if __name__ == "__main__":
     main()

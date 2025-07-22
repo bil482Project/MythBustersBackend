@@ -29,8 +29,8 @@ public class Profile {
     private Avatar raceGameAvatar;
 
     @ManyToOne
-    @JoinColumn(name = "baloon_game_avatar_id")
-    private Avatar baloonGameAvatar;
+    @JoinColumn(name = "balloon_game_avatar_id")
+    private Avatar balloonGameAvatar;
 
     @ManyToOne
     @JoinColumn(name = "hangman_game_avatar_id")

@@ -20,7 +20,7 @@ public class Avatar {
     @Column(name = "name", nullable = false)
 	private String name;
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "emoji", nullable = false)
     private String imageUrl;
 
     @Column(name = "game_type", nullable = false)
