@@ -47,7 +47,7 @@ The default PostgreSQL admin user is `postgres`. Set a password for it:
    Replace `your_password_here` with a secure password. You'll need this for the next step.
 
 ### 3. Set Up the Database and User
-The project requires a database named `myth_buster_db` and a user named `username` with password `password`. The provided `create_database.py` script automates this process.
+The project requires a database named `myth_busters_db` and a user named `username` with password `password`. The provided `create_database.py` script automates this process.
 
 1. Install the required Python library:
    ```bash
@@ -65,13 +65,13 @@ The project requires a database named `myth_buster_db` and a user named `usernam
    - Enter the new `password` for the created user.
 4. The script will:
    - Create the `username` user with password `password` (if it doesn't exist).
-   - Create the `myth_buster_db` database with `username` as the owner.
+   - Create the `myth_busters_db` database with `username` as the owner.
    - Update the `application.properties` file with the correct database connection settings.
 
 ### 4. Configure the Application
 Ensure the `application.properties` file contains:
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/myth_buster_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/myth_busters_db
 spring.datasource.username=username
 spring.datasource.password=password
 spring.jpa.hibernate.ddl-auto=none
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS test_table (
 
 If you encounter Flyway errors, reset the migration history:
 ```sql
-psql -h localhost -U username -d myth_buster_db
+psql -h localhost -U username -d myth_busters_db
 DROP TABLE IF EXISTS flyway_schema_history;
 ```
 
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS flyway_schema_history;
    mvn spring-boot:run
    ```
 
-The application should start without errors, connecting to the `myth_buster_db` database.
+The application should start without errors, connecting to the `myth_busters_db` database.
 
 ## Troubleshooting
 - **"FATAL: database 'username' does not exist"**:
