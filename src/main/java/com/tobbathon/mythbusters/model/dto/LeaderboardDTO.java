@@ -2,7 +2,6 @@ package com.tobbathon.mythbusters.model.dto;
 
 import lombok.Data;
 
-//belki işime yarar
 @Data
 public class LeaderboardDTO {
     private Integer profileId;

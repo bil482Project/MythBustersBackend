@@ -13,6 +13,6 @@ public class BalloonLeaderboardStrategy implements LeaderboardStrategy {
 
     @Override
     public List<LeaderboardDTO> getLeaderboard() {
-        return leaderboardRepository.orderLeaderboardByGameTypeDesc("baloon");
+        return leaderboardRepository.orderLeaderboardByGameTypeDesc("balloon");
     }
 }
