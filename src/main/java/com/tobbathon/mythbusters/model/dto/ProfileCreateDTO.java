@@ -3,7 +3,9 @@ package com.tobbathon.mythbusters.model.dto;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -21,12 +23,15 @@ public class ProfileCreateDTO {
     @Size(min = 6, message = "Şifre en az 6 karakter olmalı")
     private String password;
 
+    @NotNull(message = "Coin boş olamaz")
+    @Min(value = 0, message = "Coin negatif olamaz")
     private Integer coin;
 
     private ProfileCreateDTO(Builder builder) {
         this.username = builder.username;
         this.email = builder.email;
         this.password = builder.password;
+        this.coin = builder.coin;
     }
 
     public ProfileCreateDTO() {}
@@ -53,6 +58,9 @@ public class ProfileCreateDTO {
         }
 
         public Builder coin(Integer coin) {
+            if (coin != null && coin < 0) {
+            throw new IllegalArgumentException("Coin değeri negatif olamaz.");
+            }
             this.coin = coin;
             return this;
         }

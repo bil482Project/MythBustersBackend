@@ -1,6 +1,7 @@
 package com.tobbathon.mythbusters.service;
 
 import java.util.List;
+import org.springframework.util.StringUtils;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ public class AvatarService {
     }
  
     public List<Avatar> findAvatarByGameType(String gameType) {
-        return avatarRepository.findAvatarByGameType(gameType);
+        if (!StringUtils.hasText(gameType)) {
+            throw new IllegalArgumentException("Game type must not be empty");
+        }
+        List<Avatar> avatars = avatarRepository.findAvatarByGameType(gameType);
+        return avatars == null ? List.of() : avatars;
     }
 }

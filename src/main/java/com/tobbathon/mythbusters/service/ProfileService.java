@@ -24,6 +24,14 @@ public class ProfileService {
     }
 
     public ProfileDTO createProfile(ProfileCreateDTO createDTO) {
+        if (createDTO == null || !org.springframework.util.StringUtils.hasText(createDTO.getUsername()) ||
+            !org.springframework.util.StringUtils.hasText(createDTO.getEmail()) ||
+            !org.springframework.util.StringUtils.hasText(createDTO.getPassword())) {
+            throw new IllegalArgumentException("Username, email, and password must not be empty");
+        }
+        if (createDTO.getCoin() == null || createDTO.getCoin() < 0) {
+            throw new IllegalArgumentException("Coin must be a non-negative integer");
+        }
         // 1. Şifreyi hash'le
         String hashedPassword = passwordEncoder.encode(createDTO.getPassword());
 
@@ -68,9 +76,15 @@ public class ProfileService {
     }
 
     public ProfileDTO login(LoginRequestDTO loginRequestDTO) {
+        if (loginRequestDTO == null || !org.springframework.util.StringUtils.hasText(loginRequestDTO.getEmail()) ||
+            !org.springframework.util.StringUtils.hasText(loginRequestDTO.getPassword())) {
+            throw new IllegalArgumentException("Email and password must not be empty");
+        }
         // 1. Kullanıcıyı email ile bul
         Profile profile = profileRepository.findByEmail(loginRequestDTO.getEmail());
-
+        if (profile == null) {
+            throw new IllegalArgumentException("User not found with email: " + loginRequestDTO.getEmail());
+        }
         // 2. Şifreyi kontrol et
         if (!passwordEncoder.matches(loginRequestDTO.getPassword(), profile.getPasswordHash())) {
             throw new IllegalArgumentException("Invalid credentials");
@@ -90,6 +104,12 @@ public class ProfileService {
     }
 
     public void updateCoin(String username, Integer coin) {
+        if (!org.springframework.util.StringUtils.hasText(username)) {
+            throw new IllegalArgumentException("Username must not be empty");
+        }
+        if (coin == null || coin < 0) {
+            throw new IllegalArgumentException("Coin must be a non-negative integer");
+        }
         profileRepository.updateCoin(username, coin);
     }
 }
