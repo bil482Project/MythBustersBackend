@@ -106,6 +106,10 @@ DROP TABLE IF EXISTS flyway_schema_history;
 
 The application should start without errors, connecting to the `myth_busters_db` database.
 
+### 7. Unit Tests
+General unit tests with coverage measured by JaCoCo. Below are the coverage percentages.
+<img width="1256" height="252" alt="Screenshot from 2025-07-23 21-55-14" src="https://github.com/user-attachments/assets/47ecd212-ea0e-4290-9ab0-2cd29d3352a1" />
+
 ## Troubleshooting
 - **"FATAL: database 'username' does not exist"**:
   - Ensure the `create_database.py` script uses `database="postgres"` for the admin connection (see the script provided in previous conversations).
